@@ -12,7 +12,7 @@ You may not use this file except in compliance with the License.
 
 # Metadata
 __name__ = 'tcmi'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __description__ = 'A Python package for estimating mutual dependencies of multivariate continuous distributions'
 __author__ = 'Benjamin Regler <regler@fhi-berlin.mpg.de>'
 __url__ = 'https://github.com/sommerregen/tcmi'
