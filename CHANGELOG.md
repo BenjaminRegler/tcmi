@@ -1,3 +1,10 @@
+# v1.0.2
+## 20/01/2020
+
+**Improved:**
+
+* Removed unnecessary descriptor from tutorial
+
 # v1.0.1
 ## 17/01/2020
 
