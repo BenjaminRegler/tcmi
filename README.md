@@ -4,9 +4,7 @@ The identification of relevant features, i.e., the driving variables that determ
 
 This interactive notebook includes the original implementation of total cumulative mutual information (TCMI) to reproduce the main results presented in the publication:
 
-<div style="padding: 1ex; margin-top: 1ex; margin-bottom: 1ex; border-style: dotted; border-width: 1pt; border-color: blue; border-radius: 3px;">
-B. Regler, M. Scheffler, and L. M. Ghiringhelli: "TCMI: a non-parametric mutual-dependence estimator for multivariate continuous distributions"
-</div>
+> B. Regler, M. Scheffler, and L. M. Ghiringhelli: "TCMI: a non-parametric mutual-dependence estimator for multivariate continuous distributions"  [<a href="https://arxiv.org/abs/2001.11212">arxiv:2001.11212</a>] [<a href="https://arxiv.org/pdf/2001.11212">pdf</a>]
 
 TCMI is a measure of the relevance of mutual dependencies based on cumulative probability distributions. TCMI can be estimated directly from sample data and is a non-parametric, robust and deterministic measure that facilitates comparisons and rankings between feature sets with different cardinality. The ranking induced by TCMI allows for feature selection, i.e. the identification of the set of relevant features that are statistical related to the process or the property of a system, while taking into account the number of data samples as well as the cardinality of the feature subsets.
 
@@ -22,7 +20,7 @@ This repository (notebook and code) is released under the [Apache License, Versi
 
 #### Project Information:
 
-**Maintainer:** <a href="https://gitlab.rzg.mpg.de/rbenj" style="color: #808080;" title="Maintainer">&#x1F464; Benjamin Regler</a>
+**Maintainer:** <a href="https://github.com/sommerregen" style="color: #808080;" title="Maintainer">&#x1F464; Benjamin Regler</a>
 
 **Status:** <span style="color: #008000;">&#10004; Under active development</span>
 
@@ -30,4 +28,4 @@ This repository (notebook and code) is released under the [Apache License, Versi
 
 Copyright (c) 2018+ Fritz Haber Institute of the Max Planck Society ([Benjamin Regler][github]).
 
-[github]: https://github.com/Sommerregen "GitLab account of Benjamin Regler"
+[github]: https://github.com/sommerregen "GitLab account of Benjamin Regler"
