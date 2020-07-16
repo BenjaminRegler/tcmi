@@ -1,3 +1,10 @@
+# v1.0.3
+## 16/07/2020
+
+**Improved:**
+
+* Code cleanup and added link to paper
+
 # v1.0.2
 ## 20/01/2020
 
