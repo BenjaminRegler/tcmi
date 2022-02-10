@@ -26,10 +26,15 @@ import scipy.stats
 from . import utils
 
 from sklearn import metrics
-from sklearn.metrics.scorer import _check_multimetric_scoring
+try:
+    # sklearn<=0.21.3 
+    from sklearn.metrics.scorer import _check_multimetric_scoring
+except ImportError:
+    # sklearn>0.21.3
+    from sklearn.metrics._scorer import _check_multimetric_scoring
 from sklearn.model_selection._validation import _fit_and_score
 from sklearn.model_selection import cross_validate as _cross_validate
-
+    
 
 def cross_validate(estimator, x, y, scoring=None, cv='warn', **kwargs):
     """Cross-validate model.
