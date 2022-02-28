@@ -4,3 +4,4 @@ pandas==0.24.2
 scikit-learn==0.22.1
 joblib==0.14.1
 matplotlib==3.1.2
+lightgbm==3.1.1
