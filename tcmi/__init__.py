@@ -11,12 +11,11 @@ You may not use this file except in compliance with the License.
 """
 
 # Metadata
-__name__ = 'tcmi'
-__version__ = '1.0.3'
-__description__ = 'A Python package for estimating mutual dependencies of multivariate continuous distributions'
-__author__ = 'Benjamin Regler <regler@fhi-berlin.mpg.de>'
-__url__ = 'https://github.com/sommerregen/tcmi'
-__email__ = 'regler@fhi-berlin.mpg.de'
-__copyright__ = 'Copyright 2018+, Fritz Haber Institute of the Max Planck ' \
-                'Society'
-__license__ = 'Apache License, Version 2.0'
+__name__ = "tcmi"
+__version__ = "1.1.0"
+__description__ = "A Python package for estimating mutual dependencies of multivariate continuous distributions"
+__author__ = "Benjamin Regler <regler@fhi-berlin.mpg.de>"
+__url__ = "https://github.com/benjaminregler/tcmi"
+__email__ = "regler@fhi-berlin.mpg.de"
+__copyright__ = "Copyright 2018+, Fritz Haber Institute of the Max Planck Society"
+__license__ = "Apache License, Version 2.0"
