@@ -1,13 +1,13 @@
 Max Planck Society - Fritz Haber Institute
 
 Copyright (c) 2018+ Fritz Haber Institute of the Max Planck Society
-Contributors: Benjamin Regler <regler@fhi-berlin.mpg.de> - https://github.com/Sommerregen
+Contributors: Benjamin Regler <regler@fhi-berlin.mpg.de> - https://github.com/benjaminregler
               (Big-Data Analytics for Materials Science, Luca M. Ghiringhelli)
 Affiliation:  Theory Department, Faradayweg 4-6, 14195 Berlin, Germany
 URL:          http://th.fhi-berlin.mpg.de/site/ 
-Citation:     <>
+Citation:     https://arxiv.org/abs/2001.11212
               
-This software is part of the publication <>. An interactive online tutorial can be found in the NOMAD Analytics Toolkit <>.
+This software is part of the publication "TCMI: a non-parametric mutual-dependence estimator for multivariate continuous distributions" <https://arxiv.org/abs/2001.11212>. An interactive online tutorial can be found in the NOMAD Analytics Toolkit <https://analytics-toolkit.nomad-coe.eu/public/user-redirect/notebooks/tutorials/tcmi.ipynb>.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
