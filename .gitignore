@@ -142,3 +142,4 @@ tags
 
 # Extra folder
 .idea
+assets/*.jar
