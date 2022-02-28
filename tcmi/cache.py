@@ -97,4 +97,4 @@ class Cache(object):
         """Save cache to file.
         """
         with gzip.open(self._filename, 'wb') as file:
-            pickle.dump(self._data, file, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self._data, file, pickle.DEFAULT_PROTOCOL)

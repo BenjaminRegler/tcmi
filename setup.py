@@ -16,17 +16,17 @@ import json
 import tcmi as pkg
 from setuptools import setup, find_packages
 
-with io.open('metainfo.json', encoding='utf-8') as file:
+with io.open("metainfo.json", encoding="utf-8") as file:
     metainfo = json.load(file)
 
 setup(
     name=pkg.__name__,
     version=pkg.__version__,
-    author=', '.join(metainfo['authors']),
-    author_email=metainfo['email'],
-    url=metainfo['url'],
-    description=metainfo['title'],
-    long_description=metainfo['description'],
+    author=", ".join(metainfo["authors"]),
+    author_email=metainfo["email"],
+    url=metainfo["url"],
+    description=metainfo["title"],
+    long_description=metainfo["description"],
     packages=find_packages(),
-    install_requires=['numpy', 'scipy', 'pandas', 'scikit-learn', 'joblib'],
+    install_requires=["numpy", "scipy", "pandas", "scikit-learn", "joblib", "matplotlib"],
 )

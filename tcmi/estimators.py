@@ -44,6 +44,7 @@ class DependenceEstimator(sk.base.BaseEstimator, sk.base.RegressorMixin):
         x, y = sk.utils.check_X_y(x, y, multi_output=False, y_numeric=True)
         size = y.shape[-1]
 
+        # Save data
         self._variables = (x, y)
 
     def predict(self, x):
@@ -56,7 +57,11 @@ class DependenceEstimator(sk.base.BaseEstimator, sk.base.RegressorMixin):
     def score(self, x, y=None):
         """Score mutual dependence.
         """
+
+        # Get method
         method = self.method.lower()
+        if method == 'mcde':
+            method = 'mwp'
 
         score = 0
         if method == 'tcmi':
@@ -65,9 +70,37 @@ class DependenceEstimator(sk.base.BaseEstimator, sk.base.RegressorMixin):
             if isinstance(x, np.ndarray):
                 x = x.T
                 
+            # Compute cumulative mutual information
             x = tuple(np.asarray(variable) for variable in x)
             kwargs = dict(n_jobs=self.n_jobs, verbose=self.verbose, adjust=0.1,
                           pre_dispatch=self.pre_dispatch, cache=self.cache)
             score = entropy.cumulative_mutual_information(y, x, **kwargs)
+        else:
+            # Get executable
+            current_path = os.path.dirname(os.path.realpath(__file__))
+            path = os.path.join(os.path.dirname(current_path),
+                                'assets', 'mcde.jar')
 
+            # Compute contrast measure with sepcified method
+            with tempfile.NamedTemporaryFile(suffix='.csv') as file:
+                filename = file.name
+
+                # Save data
+                data = np.column_stack((y, x))
+                np.savetxt(filename, data, delimiter=',')
+
+                # Run command
+                command = 'java -jar "{:s}" -t EstimateDependency -p 1 -f {:s} ' \
+                          '-a {:s} -m {:d}'.format(path, filename, method, self.n_iter)
+        
+                output = subprocess.check_output(command, shell=True)
+                output = output.decode()
+
+                # Extract dependency estimation (score)
+                match = re.search(r'^\d+(?:.\d+)?$', output, re.M)
+                score = np.float_(0)
+                if match:
+                    score = np.float_(match.group(0))
+
+        # Make sure dependence estimator is always in the range [0, 1]
         return np.clip(score, 0, 1)

@@ -41,6 +41,7 @@ def is_numeric(obj):
     """Check if object is numeric.
     """
     
+    # Check numpy object and pandas dataframes 
     flag = bool(isinstance(obj, np.ndarray) and obj.dtype.kind in 'OSU')
     if isinstance(obj, pd.Series):
         flag |= pd.api.types.is_categorical_dtype(obj)
@@ -48,6 +49,7 @@ def is_numeric(obj):
         for key in obj.columns:
             flag |= is_numeric(obj[key])
     
+    # General check (may not cover all cases)
     attrs = ['__add__', '__sub__', '__mul__', '__truediv__', '__pow__']
     return all(hasattr(obj, attr) for attr in attrs) and not flag
 
@@ -55,12 +57,14 @@ def is_numeric(obj):
 def prepare_data(data, target, copy=False):
     """Prepare data by agumenting feature space.
     """   
+    # Make copy
     if copy:
         data = data.copy()
 
     if isinstance(target, str):
         target = [target]
     
+    # Augment feature space
     keys = sorted(data)
     hashes = set()
     
@@ -69,18 +73,22 @@ def prepare_data(data, target, copy=False):
         if key in target:
             continue
 
+        # Compute hash
         fingerprint = get_fingerprint(value)
         hashes.add(fingerprint)
 
-        for label, chain in _MAPPINGS.items():
+        # Generate features
+        for label, chain in sorted(_MAPPINGS.items(), key=lambda x: x[0]):
             alias = label.replace('{}', '')
             label = label.format(key)
 
+            # Apply function chain
             result = value
             if is_numeric(value):
                 for func in chain:
                     result = func(result)
                 
+            # Compute hash and compare with database
             fingerprint = get_fingerprint(result)
             if fingerprint not in hashes:
                 data[label] = result
@@ -97,6 +105,7 @@ def filter_subsets(subsets, remove_duplicates=False):
     results = []
     duplicates = set()
     for subset in subsets:        
+        # Normalize subspace
         subspace_original = subset['subspace']
         size = len(subspace_original)
 
@@ -106,6 +115,7 @@ def filter_subsets(subsets, remove_duplicates=False):
             normalized_subspace = tuple(strip(k, prefix, suffix)
                                         for k in normalized_subspace)
 
+        # Filter duplicate keys
         if remove_duplicates:
             subspace = []
             for k in normalized_subspace:
@@ -113,9 +123,11 @@ def filter_subsets(subsets, remove_duplicates=False):
                     subspace.append(k)
             normalized_subspace = tuple(subspace)
 
+        # Generate key for duplicate search
         key = ','.join(sorted(normalized_subspace))
         if key in duplicates:            continue
 
+        # Process subspace
         duplicates.add(key)
         subset = subset.copy()
         subset.update({
@@ -172,6 +184,7 @@ def index_split(index, dimension=1, method='symmetric'):
     size = len(index)
 
     if method == 'adaptive':
+        # Dynamically refine index like a mesh
         stack = [index]
         split = []
 
@@ -195,6 +208,7 @@ def index_split(index, dimension=1, method='symmetric'):
             split = []
 
     elif method == 'symmetric':
+        # Read index from left and right symmetrically
         for i in range(np.math.ceil(size / 2)):
             a, b = index[i], index[-1-i]
             split = np.array((a, b))
@@ -202,6 +216,7 @@ def index_split(index, dimension=1, method='symmetric'):
             splits.append(split if a < b else split[0:1])
 
     elif method == 'interleave':
+        # Interweave indices
         divider = max(2, np.sqrt(size).astype(np.int) // dimension)
         step = size // divider + 1
 
@@ -212,6 +227,7 @@ def index_split(index, dimension=1, method='symmetric'):
     else:
         raise KeyError('Unknown split method "{:s}".'.format(method))
 
+    # Return arrays like array_split
     return splits
 
 
@@ -219,25 +235,32 @@ def ndindex(*indices, method='symmetric', raw=False, grouped=False,
             multi_index=False):
     """An N-dimensional iterator object to index arrays.
     """
+    # Split indices into groups
     dimension = len(indices)
     splits = [index_split(np.arange(index), dimension=dimension,
                           method=method) for index in indices]
 
+    # Create pool of indices to iterate over
     pool = [split.pop(0) for split in splits]
     empty = np.array([], dtype=np.int_)
 
+    # Return multi-index?
     iteration = None
     if multi_index:
         iteration = 0
 
+    # Perform initial multi-dimensional indexing
     iterator = (pool if raw else itertools.product(*pool))
     yield from wrap_iterator(iterator, wrap=grouped, index=iteration)
 
+    # Adaptively refine multi-dimensional index
     while True:
+        # Reset loop
         loop = False
         if multi_index:
             iteration += 1
 
+        # Get next mesh refinement
         staging = []
         for split in splits:
             flag = len(split) > 0
@@ -245,13 +268,16 @@ def ndindex(*indices, method='symmetric', raw=False, grouped=False,
 
             staging.append(split.pop(0) if flag else empty)
 
+        # Stop iterations
         if not loop:
             break
 
         for i in range(dimension):
+            # Ignore empty dimensions
             if staging[i].size == 0:
                 continue
 
+            # Merge indices
             indices = pool.copy()
             for j in range(i + 1, dimension):
                 indices[j] = np.concatenate((pool[j], staging[j]))
@@ -260,4 +286,5 @@ def ndindex(*indices, method='symmetric', raw=False, grouped=False,
             iterator = (indices if raw else itertools.product(*indices))
             yield from wrap_iterator(iterator, wrap=grouped, index=iteration)
 
+        # Enlarge pool
         pool = [np.concatenate(v) for v in zip(pool, staging)]
