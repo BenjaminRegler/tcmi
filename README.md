@@ -6,7 +6,9 @@ The identification of relevant features, i.e., the driving variables that determ
 
 This interactive notebook introduces the concepts and the original implementation of total cumulative mutual information (TCMI) to reproduce the main results presented in the publication:
 
-> B. Regler, M. Scheffler, and L. M. Ghiringhelli: "TCMI: a non-parametric mutual-dependence estimator for multivariate continuous distributions" [<a href="https://arxiv.org/abs/2001.11212">arxiv:2001.11212</a>] [<a href="https://arxiv.org/pdf/2001.11212">pdf</a>]
+> B. Regler, M. Scheffler, and L. M. Ghiringhelli: "TCMI: a non-parametric mutual-dependence estimator for multivariate continuous distributions". Data Mining and Knowledge Discovery (2022).
+>
+> [DOI: <a href="https://doi.org/10.1007/s10618-022-00847-y">10.1007/s10618-022-00847-y</a> (<a href="https://link.springer.com/content/pdf/10.1007/s10618-022-00847-y.pdf">pdf</a>)] [Preprint: <a href="https://arxiv.org/abs/2001.11212">arxiv:2001.11212</a> (<a href="https://arxiv.org/pdf/2001.11212">pdf</a>)]
 
 TCMI is a measure of the relevance of mutual dependencies based on cumulative probability distributions. TCMI can be estimated directly from sample data and is a non-parametric, robust and deterministic measure that facilitates comparisons and rankings between feature sets with different cardinality. The ranking induced by TCMI allows for feature selection, i.e. the identification of the set of relevant features that are statistical related to the process or the property of a system, while taking into account the number of data samples as well as the cardinality of the feature subsets.
 
