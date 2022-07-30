@@ -5,9 +5,13 @@ Contributors: Benjamin Regler <regler@fhi-berlin.mpg.de> - https://github.com/be
               (Big-Data Analytics for Materials Science, Luca M. Ghiringhelli)
 Affiliation:  Theory Department, Faradayweg 4-6, 14195 Berlin, Germany
 URL:          http://th.fhi-berlin.mpg.de/site/ 
-Citation:     https://arxiv.org/abs/2001.11212
+DOI:          https://doi.org/10.1007/s10618-022-00847-y
+Preprint:     https://arxiv.org/abs/2001.11212
+
+Citation:
+Regler, B., Scheffler, M. & Ghiringhelli, L.M. TCMI: a non-parametric mutual-dependence estimator for multivariate continuous distributions. Data Mining and Knowledge Discovery (2022).
               
-This software is part of the publication "TCMI: a non-parametric mutual-dependence estimator for multivariate continuous distributions" <https://arxiv.org/abs/2001.11212>. An interactive online tutorial can be found in the NOMAD Analytics Toolkit <https://analytics-toolkit.nomad-coe.eu/public/user-redirect/notebooks/tutorials/tcmi.ipynb>.
+This software is part of the publication "TCMI: a non-parametric mutual-dependence estimator for multivariate continuous distributions" <https://arxiv.org/abs/2001.11212> (preprint) and <https://doi.org/10.1007/s10618-022-00847-y> (published article). An interactive online tutorial can be found in the NOMAD Analytics Toolkit <https://analytics-toolkit.nomad-coe.eu/public/user-redirect/notebooks/tutorials/tcmi.ipynb> or can be downloaded from Zenodo (https://doi.org/10.5281/zenodo.6577261).
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
